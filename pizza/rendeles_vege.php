@@ -44,6 +44,7 @@
 			$vegosszeg += $osszeg;
 
 	}
+
 	?>
 	
 
@@ -84,6 +85,9 @@
 
     	$lezaro = "UPDATE rendeles SET lezart = 1 , futarId = '$futarId',rendelesKodja = '$kod' WHERE vevoid = '$vevoid'";
     	$felkuld = mysqli_query($conn,$lezaro);
+
+    	$penzFeltolt = "UPDATE futarok SET nalalevoPenz = '$vegosszeg' WHERE Id = '$futarId'";
+    	mysqli_query($conn,$penzFeltolt);
     	
     	header("Location: vege.php");
     }

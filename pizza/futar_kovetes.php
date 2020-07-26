@@ -2,11 +2,13 @@
 	include 'minta.php';
 	include 'connect.php';
 ?>
-<div class="container bg-light my-5">
-	<h1 class="text-center p-2">Futár követés</h1>
+<div class="container my-5 p-4">
+	<h1 class="text-center p-2 text-light">Futár követés</h1>
 	<form>
-		Válaszd ki, hogy melyik futárt szeretnéd megtekinteni : 
-		<select id = "futarok">
+		<div class="form-group">
+			<p class="text-light"><b>Válaszd ki, hogy melyik futárt szeretnéd megtekinteni :</b></p>
+		<select id = "futarok" class="form-control">
+			<option selected disabled>Válassz futárt!</option>
 			<?php 
 			$sql = "SELECT Id,futarNeve from futarok";
 			$eredmeny = mysqli_query($conn,$sql);
@@ -15,8 +17,10 @@
 			}
 		?>
 		</select>
+		</div>
+		
 	</form>
-	<div id="demo"></div>
+	<div id="demo" class="my-5"></div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
