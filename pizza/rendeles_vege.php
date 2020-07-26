@@ -72,7 +72,17 @@
 	<?php 
     if (isset($_POST['rendeles_befejezese2'])) {
     	$futarId = $_POST['futarok'];
-    	$lezaro = "UPDATE rendeles SET lezart = 1 , futarId = '$futarId' WHERE vevoid = '$vevoid'";
+
+    	$rendelesKod_sql = "SELECT rendelesKodja FROM rendeles ORDER BY rendelesKodja DESC LIMIT 1";
+
+		$eredmeny_rendelesKod = mysqli_query($conn,$rendelesKod_sql);
+
+    	while ($sor = $eredmeny_rendelesKod -> fetch_assoc()) {
+				$kod = $sor['rendelesKodja'];
+				$kod = intval($kod)+1;
+		}
+
+    	$lezaro = "UPDATE rendeles SET lezart = 1 , futarId = '$futarId',rendelesKodja = '$kod' WHERE vevoid = '$vevoid'";
     	$felkuld = mysqli_query($conn,$lezaro);
     	
     	header("Location: vege.php");

@@ -129,6 +129,8 @@
 		$sql_check = "SELECT * FROM rendeles WHERE vevoid = '$vevoid' AND pizzaid = '$pizza_id' AND 
 		datum = '$datum' AND lezart = 0";
 
+		
+
 
 		$vegrehajt = mysqli_query($conn,$sql_check);
 		$checkrows = mysqli_num_rows($vegrehajt);
@@ -144,9 +146,10 @@
 			$frissites = mysqli_query($conn,$frissit);
 		}
 		else{ // Ha nem talál akkor hozzáad egy új sort a táblához
+			
 			$sum = $darab * $ar;
 			$time = date('H:i:s');
-			$sql_rendeles1 = "INSERT INTO rendeles(vevoid,pizzaid,datum,ar,darab,lezart,mikor,sum) VALUES ('$vevoid','$pizza_id','$datum','$ar','$darab',0,'$time','$sum')";
+			$sql_rendeles1 = "INSERT INTO rendeles(vevoid,pizzaid,datum,ar,darab,lezart,mikor,sum,rendelesKodja) VALUES ('$vevoid','$pizza_id','$datum','$ar','$darab',0,'$time','$sum',0)";
 			$result_rendeles1 = mysqli_query($conn,$sql_rendeles1);
 		}
 		
@@ -196,8 +199,7 @@
 
 
 	}
-			
-
+		
 ?>
 <div class="container">
 	<table class="table table-dark ">
