@@ -80,11 +80,11 @@
                     <div class="card bg-dark text-white" style="width: 17rem;">
                         <img  class="card-img-top" src="logo.png" alt="kep">
                         <div class="card-body">
-                            <h5 class="card-title">######</h5>
+                            <h5 class="card-title">Futár követés</h5>
                                 <div class="card-text">
-                                    <p>######</p>
+                                    <p>Itt nyomon lehet követni, hogy melyik futárnál mennyi pénz van</p>
                                 </div>
-                                <a href="#" class="btn btn-danger">Mehet</a>    
+                                <a href="futar_kovetes.php" class="btn btn-danger">Mehet</a>    
                         </div>
                     </div>                    
                 </div>

@@ -44,15 +44,15 @@
 	$vevoid = $_SESSION['vevoid'];
 
 	$sql = "SELECT * FROM vevo WHERE Id = '$vevoid'"; // Lekéri a vevő adatait
-	$result = mysqli_query($conn,$sql);
-
 	$sql_pizzak = "SELECT * FROM pizzak"; // lekéri a pizzák adatait
-	$pizza_result = mysqli_query($conn,$sql_pizzak);
-
-	$rendelesek_lekerese = "SELECT * FROM rendeles  INNER JOIN pizzak on rendeles.pizzaid = pizzak.id WHERE rendeles.vevoid = '$vevoid' AND rendeles.lezart = 0" // Lekéri a rendeléseket
-	;
+	$rendelesek_lekerese = "SELECT * FROM rendeles  INNER JOIN pizzak on rendeles.pizzaid = pizzak.id WHERE rendeles.vevoid = '$vevoid' AND rendeles.lezart = 0"; // Lekéri a rendeléseket
+	$futar_leker = "SELECT * FROM futarok";
+	
 
 	$felkuld = mysqli_query($conn,$rendelesek_lekerese);
+	$result = mysqli_query($conn,$sql);
+	$pizza_result = mysqli_query($conn,$sql_pizzak);
+	$futarok = mysqli_query($conn,$futar_leker);
 
 	while ($row = $result -> fetch_assoc()) { //Kiírja a vevő adatait felülre
 		echo "<div class='container'>
@@ -80,11 +80,16 @@
 					<th>Pizza neve</th>
 					<th>Pizza ára</th>
 					<th>Darabszám</th>";
+?>
+
+	
+	<?php
+
 	while ($row = $felkuld -> fetch_assoc()) { // Ez a rész kiírja a kosárban levő elemeket
-		
 		echo "
 				<tr>
 					<form action = 'rendeles_felvetel.php' method= 'POST'>
+
 					<td>".$row['Nev']."</td>
 					<td>".$row['Ar']."</td>
 					<td><button type = 'submit' name = 'levon' class = 'btn btn-danger' value = ".$row['Id']." >-</button><label class = 'px-2'>".$row['darab']."</label><button type = 'submit'name = 'rendel' value = ".$row['Id']." class = 'btn btn-success'>+</button></td>
@@ -105,9 +110,12 @@
 
 <?php 
 	if (isset($_POST['rendel'])) { // Ha meg lett nyomva a termék hozzáadása
+		
+
 		header("Refresh:0");
 		$pizza_id =  $_POST['rendel'];
 		$darab = 1;
+		$datum = date("Y-m-d");
 
 		$sql_leker = "SELECT Ar FROM pizzak WHERE Id = '$pizza_id'"; // Ez lekéri nekem a pizzák árait
 		$result = mysqli_query($conn,$sql_leker);
@@ -116,14 +124,14 @@
 			$ar = $row['Ar'];
 		}
 
-		$datum = date("Y-m-d");
+		
 
 		$sql_check = "SELECT * FROM rendeles WHERE vevoid = '$vevoid' AND pizzaid = '$pizza_id' AND 
 		datum = '$datum' AND lezart = 0";
 
 
 		$vegrehajt = mysqli_query($conn,$sql_check);
-		$checkrows=mysqli_num_rows($vegrehajt);
+		$checkrows = mysqli_num_rows($vegrehajt);
 
 		if ($checkrows > 0) { // Ez megnézi, hogy van e már ilyen sor az adatbázisba
 			while ($row = $vegrehajt -> fetch_assoc()) {
@@ -191,8 +199,6 @@
 			
 
 ?>
-
-
 <div class="container">
 	<table class="table table-dark ">
 		<form action = 'rendeles_felvetel.php' method="POST">
@@ -211,6 +217,5 @@
 		?>
 	</form>
 	</table>
-
 </div>
 

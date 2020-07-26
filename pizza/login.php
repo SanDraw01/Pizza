@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	if (isset($_POST['nev']) and isset($_POST['jelszo'])) {
 		$nev = $_POST['nev'];
 		$jelszo = $_POST['jelszo'];
@@ -7,8 +8,8 @@
 			$_SESSION['felhasznalo_nev'] = $nev;
 			header('Location: menu.php');
 		}else{
-			echo "Hibás bejelentkezési adatok!";
-			echo "<a href= 'index.php'>Vissza</a>";
+			$_SESSION['hiba'] = 1;
+			header('Location: index.php');
 		}
 	}
 ?>

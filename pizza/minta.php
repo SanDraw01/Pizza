@@ -36,7 +36,7 @@
                   <a class='dropdown-item' href='futar_hozzaadas.php'>Futár hozzáadása</a>
                   <a class='dropdown-item' href='futar_szerkesztes.php'>Futárok szerkesztése/törlése</a>
                 <div class='dropdown-divider'></div>
-             <a class='dropdown-item' href='#'>Futár követés</a>
+             <a class='dropdown-item' href='futar_kovetes.php'>Futár követés</a>
         </div>
       </li>
     </ul>

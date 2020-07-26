@@ -52,15 +52,12 @@
 
 
       $datum = date('Y-m-d');
-      $sql = "SELECT * FROM rendeles INNER JOIN vevo ON rendeles.vevoid = vevo.id
-      INNER JOIN pizzak ON rendeles.pizzaid = pizzak.Id 
-      WHERE datum = '$datum' and lezart = 1 ORDER BY datum"; // GROUP BY Pizzát probáld meg sanyih
+
+      $sql = "SELECT * from rendeles INNER JOIN vevo on rendeles.vevoid = vevo.Id INNER JOIN pizzak on rendeles.pizzaid = pizzak.Id "; // GROUP BY Pizzát probáld meg sanyih
       $result = mysqli_query($conn,$sql);
 
-
-      echo "<table class = 'table'><th>Vevő neve</th><th>Dátum</th><th>Pizza neve</th><th>Darabszám</th><th>Darab ár</th>
+      echo "<table class = 'table'><th>Vevő neve</th><th>Dátum</th><th>Pizza neve</th><th>Darabszám</th>
       <th>Rendelés összára</th>";
-      
       $sum = 0;
       $osszdarab = 0;
       while ($row = $result -> fetch_assoc()) {
@@ -69,10 +66,10 @@
         echo "<td>".$row['datum']."</td>";
         echo "<td>".$row['Nev']."</td>";
         echo "<td>".$row['darab']."</td>";
-        echo "<td>".$row['Ar']."</td>";
-        echo "<td>".$row['sum']."</td></tr>";
+        
+        //echo "<td>".$row['SUM(sum)']."</td></tr>";
 
-        $sum += $row['sum']; // Ez kiadja az aznapi bevételt
+        //$sum += $row['SUM(sum)']; // Ez kiadja az aznapi bevételt
         $osszdarab += $row['darab']; 
       }
 

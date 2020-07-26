@@ -48,18 +48,18 @@
 	
 
 	</table>
+		
 	<form action = 'rendeles_vege.php' method = 'POST'>
 	<h5>Összesen: <?php echo $vegosszeg." Ft"; ?></h5> 
 	<h6>Futár hozzárendelése:
-	<select >
+	<select name = "futarok">
 		<?php 
-			$sql = "SELECT futarNeve from futarok";
+			$sql = "SELECT Id,futarNeve from futarok";
 			$eredmeny = mysqli_query($conn,$sql);
 			while ($sor = $eredmeny->fetch_assoc()) {
-				echo "<option>".$sor['futarNeve']."</option>";
+				echo "<option value = ".$sor['Id'].">".$sor['futarNeve']."</option>";
 			}
 			
-
 		?>
 	</select>
 </h6>
@@ -71,9 +71,9 @@
 
 	<?php 
     if (isset($_POST['rendeles_befejezese2'])) {
-    	$lezaro = "UPDATE rendeles SET lezart = 1 WHERE vevoid = '$vevoid'";
+    	$futarId = $_POST['futarok'];
+    	$lezaro = "UPDATE rendeles SET lezart = 1 , futarId = '$futarId' WHERE vevoid = '$vevoid'";
     	$felkuld = mysqli_query($conn,$lezaro);
-    	
     	
     	header("Location: vege.php");
     }
