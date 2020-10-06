@@ -13,6 +13,7 @@
 
 		$vevo = new Vevo($teljesnev,$cim,$masodlagosCim,$telefonszam,$masodlagosTelefonszam);
 		$vevo->adatFelkuldes();
+		
 	}
 
 ?>

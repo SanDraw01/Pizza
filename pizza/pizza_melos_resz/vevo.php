@@ -9,9 +9,20 @@
 		function __construct($teljesnev,$cim,$masodlagosCim,$telefonszam,$masodlagosTelefonszam){
 			$this->teljesnev = $teljesnev;
 			$this->cim = $cim;
-			$this->masodlagosCim = $masodlagosCim;
+			if($masodlagosCim != ""){
+				$this->masodlagosCim = $masodlagosCim;
+			}else{
+				$this->masodlagosCim = "nincs";
+			}
+			if($masodlagosTelefonszam != "" || $masodlagosTelefonszam != 0){
+				$this->masodlagosTelefonszam = $masodlagosTelefonszam;
+			}else{
+				$this->masodlagosTelefonszam = 0;
+			}
+			
 			$this->telefonszam = $telefonszam;
-			$this->masodlagosTelefonszam = $masodlagosTelefonszam;
+			
+
 		}
 		function adatFelkuldes(){
 			include 'connect.php';
